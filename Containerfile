@@ -5,7 +5,6 @@ FROM registry.redhat.io/rhelai3/bootc-cuda-rhel9:latest
 # Note the use of ${VARIABLE_NAME}
 RUN dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
     dnf install -y firewalld wget nginx nmon && \
-    subscription-manager unregister && \
     dnf clean all
 
 
