@@ -21,7 +21,7 @@ jobs:
       - name: Build Image
         env:
           # This tells Podman where the user session bus is located
-          XDG_RUNTIME_DIR: /run/user/${{ steps.get_uid.outputs.uid }}
+          XDG_RUNTIME_DIR: /run/user/1001
         run: |
           podman build \
             --squash \
