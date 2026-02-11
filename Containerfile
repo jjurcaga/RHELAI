@@ -7,7 +7,8 @@ ARG RH_KEY
 
 # 2. Use the variables in your RUN commands
 # Note the use of ${VARIABLE_NAME}
-RUN subscription-manager register --org=${RH_ORG} --activationkey=${RH_KEY} && \
+RUN dnf install -y subscription-manager && \
+    subscription-manager register --force --org=${RH_ORG} --activationkey=${RH_KEY} && \
     subscription-manager repos --enable=rhel-9-for-x86_64-baseos-rpms \
                                --enable=rhel-9-for-x86_64-appstream-rpms && \
     dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
