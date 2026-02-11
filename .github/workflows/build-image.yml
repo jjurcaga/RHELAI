@@ -23,8 +23,6 @@ jobs:
           # This tells Podman where the user session bus is located
           XDG_RUNTIME_DIR: /run/user/${{ steps.get_uid.outputs.uid }}
         run: |
-          podman build --squash -t "$IMAGE_DEST":latest .
-        run: |
           podman build \
             --squash \
             --build-arg RH_ORG=${{ secrets.RH_ORGANIZATION_ID }} \
