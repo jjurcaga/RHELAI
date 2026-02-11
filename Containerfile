@@ -1,17 +1,9 @@
 # Stage 1: Final RHEL AI 3.2 CUDA Image
 FROM registry.redhat.io/rhelai3/bootc-cuda-rhel9:latest
 
-# We use ARGs to pass secrets from the pipeline into the build
-ARG RH_ORG
-ARG RH_KEY
-
 # 2. Use the variables in your RUN commands
 # Note the use of ${VARIABLE_NAME}
-RUN dnf install -y subscription-manager && \
-    subscription-manager register --force --org=${RH_ORG} --activationkey=${RH_KEY} && \
-    subscription-manager repos --enable=rhel-9-for-x86_64-baseos-rpms \
-                               --enable=rhel-9-for-x86_64-appstream-rpms && \
-    dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
+RUN dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
     dnf install -y firewalld wget nginx nmon && \
     subscription-manager unregister && \
     dnf clean all
