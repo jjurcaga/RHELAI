@@ -8,24 +8,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-          
-      - name: Maximize Build Space
-        run: |
-          # Remove heavy pre-installed software to make room for RHEL AI
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /opt/hostedtoolcache/CodeQL
-          
-          # Clean up Docker images that GitHub pre-loads
-          docker image prune -af
-          
-          echo "Disk space after cleanup:"
-          df -h /
 
       - name: Log in to Red Hat Registry
         run: podman login -u ${{ secrets.REDHAT_USERNAME }} -p ${{ secrets.REDHAT_PASSWORD }} registry.redhat.io
