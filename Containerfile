@@ -2,12 +2,12 @@
 FROM registry.redhat.io/rhelai3/bootc-cuda-rhel9:latest
 
 # We use ARGs to pass secrets from the pipeline into the build
-ARG RH_ORG
-ARG RH_KEY
+#ARG RH_ORG
+#ARG RH_KEY
 
 # 2. Use the variables in your RUN commands
 # Note the use of ${VARIABLE_NAME}
-RUN subscription-manager register --org=${RH_ORG} --activationkey=${RH_KEY} && \
+RUN subscription-manager register --org=13278830 --activationkey=rhelai-pipeline && \
     subscription-manager repos --enable=rhel-9-for-x86_64-baseos-rpms \
                                --enable=rhel-9-for-x86_64-appstream-rpms && \
     dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
