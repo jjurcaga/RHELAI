@@ -19,6 +19,12 @@ jobs:
       - name: Log in to Destination Registry
         run: podman login -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} quay.io
       - name: Build Image
+      - name: Build Image
+        env:
+          # This tells Podman where the user session bus is located
+          XDG_RUNTIME_DIR: /run/user/${{ steps.get_uid.outputs.uid }}
+        run: |
+          podman build --squash -t "$IMAGE_DEST":latest .
         run: |
           podman build \
             --squash \
